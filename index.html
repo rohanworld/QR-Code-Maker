@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Maker</title>
+    <link rel="shortcut icon" href="icon.PNG" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <p>Enter Text or URL</p>
+        <input type="text" placeholder="Text or URL" id="qrText">
+        <div id="imgBox" style="text-align: center">
+            <img src="" alt="QR-Code" id="qrImage">
+        </div>
+        <button onclick="createQR()">Create QR Code</button>
+    </div>
+
+    <script>
+        let imgBox = document.getElementById("imgBox");
+        let qrImage = document.getElementById("qrImage");
+        let qrText = document.getElementById("qrText");
+        function createQR() {
+            if(qrText.value.length>0){
+                qrImage.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data="+qrText.value;
+                console.log("QR Generated");
+            }else{
+                qrText.placeholder = "Input can't be Empty";
+                qrText.style.border = "2px solid red";
+                setTimeout(() => {
+                    qrText.style.border = "2px solid #000";
+                    qrText.placeholder = "Text or URL";
+                }, 1234);
+            }
+        }
+    </script>
+</body>
+</html>
